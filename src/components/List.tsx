@@ -9,11 +9,9 @@ import ListItemComponent from './ListItem';
 
 interface ListProps {
     id: string,
-    title: string,
-    taskIds: string[]
 }
 
-const ListComponent: FC<ListProps> = ({id, title, taskIds}) => {
+const ListComponent: FC<ListProps> = ({id}) => {
     const listItems: ILsitItem[] = useListItems(state => state.listItems);
   return (
     <Droppable droppableId={id}>

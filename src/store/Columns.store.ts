@@ -1,17 +1,21 @@
 import { create } from 'zustand';
 
 interface ColumnState {
-    columns: IColumn[],
+    columns: {
+        'column-1': IColumn,
+    },
 }
 
-interface IColumn {
+export interface IColumn {
     id: string,
     title: string,
-    taskIds: string[]
 }
 
 export const useColumns = create<ColumnState>((set) => ({
-    columns: [
-        { id: 'column-1', title: 'To do', taskIds: ['1', '2', '3', '4'] },
-    ],
+    columns: {
+        "column-1": {
+            id: 'column-1',
+            title: 'To do',
+        }
+    },
 }));
