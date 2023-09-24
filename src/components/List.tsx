@@ -1,3 +1,5 @@
+import {FC} from 'react';
+
 import {List} from '@mui/material';
 
 import { useListItems, ILsitItem } from '../store/ListItems.store';
@@ -5,11 +7,16 @@ import { Droppable } from 'react-beautiful-dnd';
 
 import ListItemComponent from './ListItem';
 
+interface ListProps {
+    id: string,
+    title: string,
+    taskIds: string[]
+}
 
-const ListComponent = () => {
+const ListComponent: FC<ListProps> = ({id, title, taskIds}) => {
     const listItems: ILsitItem[] = useListItems(state => state.listItems);
   return (
-    <Droppable droppableId='1'>
+    <Droppable droppableId={id}>
         {(provided) => (
             <List ref={provided.innerRef} {...provided.droppableProps} sx={{border: '2px solid black'}}>
                 {listItems.map(({title, id}, index) => (
