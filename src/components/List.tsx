@@ -2,17 +2,17 @@ import {FC} from 'react';
 
 import {List} from '@mui/material';
 
-import { useListItems, ILsitItem } from '../store/ListItems.store';
+import { ILsitItem } from '../store/ListItems.store';
 import { Droppable } from 'react-beautiful-dnd';
 
 import ListItemComponent from './ListItem';
 
 interface ListProps {
     id: string,
+    listItems: ILsitItem[]
 }
 
-const ListComponent: FC<ListProps> = ({id}) => {
-    const listItems: ILsitItem[] = useListItems(state => state.listItems);
+const ListComponent: FC<ListProps> = ({id, listItems}) => {
   return (
     <Droppable droppableId={id}>
         {(provided, snapshot) => (
