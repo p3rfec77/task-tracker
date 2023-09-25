@@ -15,10 +15,17 @@ const ListComponent: FC<ListProps> = ({id}) => {
     const listItems: ILsitItem[] = useListItems(state => state.listItems);
   return (
     <Droppable droppableId={id}>
-        {(provided) => (
-            <List ref={provided.innerRef} {...provided.droppableProps} sx={{border: '2px solid black'}}>
+        {(provided, snapshot) => (
+            <List 
+            ref={provided.innerRef} 
+            {...provided.droppableProps} 
+            sx={{
+                border: '2px solid black', 
+                background: snapshot.isDraggingOver ? 'rgba(0, 255, 0, 0.3)' : 'white',
+                padding: '10px'
+                }}>
                 {listItems.map(({title, id}, index) => (
-                    <ListItemComponent key={id} title={title} id={id} index={index}></ListItemComponent>
+                    <ListItemComponent key={id} title={title} id={id} index={index}/>
                 ))}
                 {provided.placeholder}
             </List>           

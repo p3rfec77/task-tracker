@@ -13,8 +13,17 @@ interface LsitItemProps {
 const ListItemComponent: FC<LsitItemProps> = ({title, id, index}) => {
   return (
     <Draggable draggableId={id.toString()} index={index}>
-        {(provided) => (
-            <ListItem {...provided.dragHandleProps} {...provided.draggableProps} ref={provided.innerRef} >
+        {(provided, snapshot) => (
+            <ListItem 
+            disablePadding
+            sx={{
+                background: snapshot.isDragging ? 'rgba(0, 0, 0, 0.2)' : 'white',
+                marginBottom: '10px'
+            }}
+            {...provided.dragHandleProps} 
+            {...provided.draggableProps} 
+            ref={provided.innerRef} 
+            >
                 <ListItemButton>
                     <ListItemText primary={title} />
                 </ListItemButton>
