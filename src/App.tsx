@@ -2,7 +2,7 @@ import { DragDropContext, DropResult} from 'react-beautiful-dnd';
 
 import { useListItems } from './store/ListItems.store';
 
-import { Box } from '@mui/material';
+import { Box, Container } from '@mui/material';
 
 import ListComponent from './components/List';
 
@@ -16,23 +16,18 @@ function App() {
 
     if(!destination) return;
 
-    if (
-      destination.droppableId === source.droppableId && 
-      destination.index === source.index
-      ) {
-        return;
-    }
-
-    changeOrder(draggableId, source.index, source.droppableId, destination.index);
+    changeOrder(draggableId, source.index, source.droppableId, destination.index, destination.droppableId);
   }
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      {columns.map(column => (
-        <Box key={column.id} sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-          <ListComponent listItems={column.listItems} id={column.id} />
-        </Box>
-      ))}
+      <Container sx={{display: 'flex', gap: '15px'}}>
+        {columns.map(column => (
+          <Box key={column.id} sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+            <ListComponent listItems={column.listItems} id={column.id} />
+          </Box>
+        ))}
+      </Container>
     </DragDropContext>
   )
 }

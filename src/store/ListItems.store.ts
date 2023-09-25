@@ -13,7 +13,7 @@ export interface IColumn {
 
 interface ListItemsState {
     columns: IColumn[];
-    changeOrder: (draggableId: string, sourceIndex: number, sourceId: string, destinationIndex: number) => void;
+    changeOrder: (draggableId: string, sourceIndex: number, sourceId: string, destinationIndex: number, destinationId: string) => void;
 }
 
 export const useListItems = create<ListItemsState>(set => ({
@@ -33,21 +33,44 @@ export const useListItems = create<ListItemsState>(set => ({
                 { title: 'banana', id: 7 },
                 { title: 'tomato', id: 8 }
             ]
+        },
+        {
+            id: 'column-3', title: 'column', listItems: [
+                { title: 'dota 2', id: 9 },
+                { title: 'cs go', id: 10 },
+                { title: 'apex', id: 11 },
+                { title: 'fortnite', id: 12 }
+            ]
         }
     ],
-    changeOrder: (draggableId, sourceIndex, sourceId, destinationIndex) => set(state => {
-        const currentColumn = state.columns.find(column => sourceId === column.id) as IColumn;
-        const currentItem = currentColumn.listItems.find(item => item.id === +draggableId) as ILsitItem;
-        console.log(currentColumn);
+    changeOrder: (draggableId, sourceIndex, sourceId, destinationIndex, destinationId) => set(state => {
+        const startColumn = state.columns.find(column => sourceId === column.id) as IColumn;
+        const dropColumn = state.columns.find(column => destinationId === column.id) as IColumn;
+        const currentItem = startColumn.listItems.find(item => item.id === +draggableId) as ILsitItem;
 
-        const newListItems: ILsitItem[] = [...currentColumn.listItems];
+        const startList: ILsitItem[] = [...startColumn.listItems];
+        const dropList: ILsitItem[] = [...dropColumn.listItems];
+
         const newColumns = [...state.columns];
 
-        newListItems.splice(sourceIndex, 1);
-        newListItems.splice(destinationIndex, 0, currentItem);
-        currentColumn.listItems = newListItems;
-        newColumns.splice(state.columns.indexOf(currentColumn), 1, currentColumn);
-
-        return { columns: newColumns };
+        startList.splice(sourceIndex, 1);
+        if (startColumn === dropColumn) {
+            startList.splice(destinationIndex, 0, currentItem);
+            startColumn.listItems = startList;
+            newColumns.splice(state.columns.indexOf(startColumn), 1, startColumn);
+            return { columns: newColumns };
+        } else {
+            console.log(startList);
+            dropList.splice(destinationIndex, 0, currentItem);
+            dropColumn.listItems = dropList;
+            newColumns.map(column => {
+                if (column.id === sourceId) {
+                    return { ...column.listItems = startList }
+                } else if (column.id === destinationId) {
+                    return { ...column.listItems = dropList }
+                } else return column
+            })
+            return { columns: newColumns };
+        }
     })
 }));
