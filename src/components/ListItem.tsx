@@ -18,7 +18,8 @@ const ListItemComponent: FC<LsitItemProps> = ({title, id, index}) => {
             disablePadding
             sx={{
                 background: snapshot.isDragging ? 'rgba(0, 0, 0, 0.2)' : 'white',
-                marginBottom: '10px'
+                marginBottom: '10px',
+                boxShadow: 'rgba(0, 0, 0, 0.35) 0px 2px 5px'
             }}
             {...provided.dragHandleProps} 
             {...provided.draggableProps} 

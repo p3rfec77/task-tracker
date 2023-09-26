@@ -19,7 +19,7 @@ interface ListItemsState {
 export const useListItems = create<ListItemsState>(set => ({
     columns: [
         {
-            id: 'column-1', title: 'column', listItems: [
+            id: 'column-1', title: 'to do', listItems: [
                 { title: 'yoooo', id: 1 },
                 { title: 'keeeeek', id: 2 },
                 { title: 'smek', id: 3 },
@@ -27,7 +27,7 @@ export const useListItems = create<ListItemsState>(set => ({
             ]
         },
         {
-            id: 'column-2', title: 'column', listItems: [
+            id: 'column-2', title: 'in progress', listItems: [
                 { title: 'apple', id: 5 },
                 { title: 'orange', id: 6 },
                 { title: 'banana', id: 7 },
@@ -35,7 +35,7 @@ export const useListItems = create<ListItemsState>(set => ({
             ]
         },
         {
-            id: 'column-3', title: 'column', listItems: [
+            id: 'column-3', title: 'complete', listItems: [
                 { title: 'dota 2', id: 9 },
                 { title: 'cs go', id: 10 },
                 { title: 'apex', id: 11 },
@@ -60,7 +60,6 @@ export const useListItems = create<ListItemsState>(set => ({
             newColumns.splice(state.columns.indexOf(startColumn), 1, startColumn);
             return { columns: newColumns };
         } else {
-            console.log(startList);
             dropList.splice(destinationIndex, 0, currentItem);
             dropColumn.listItems = dropList;
             newColumns.map(column => {
