@@ -12,7 +12,13 @@ function App() {
 
     if(!destination) return;
 
-    changeOrder(draggableId, source.index, source.droppableId, destination.index, destination.droppableId);
+    changeOrder(
+      draggableId, 
+      source.index, 
+      source.droppableId, 
+      destination.index, 
+      destination.droppableId
+    );
   }
 
   return (

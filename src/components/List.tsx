@@ -1,4 +1,4 @@
-import {FC} from 'react';
+import {FC, useState} from 'react';
 
 import { IconButton, List, Typography} from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
@@ -7,6 +7,7 @@ import { ILsitItem } from '../store/ListItems.store';
 import { Droppable } from 'react-beautiful-dnd';
 
 import ListItemComponent from './ListItem';
+import TaskCreator from './TaskCreator';
 
 interface ListProps {
     id: string,
@@ -15,6 +16,11 @@ interface ListProps {
 }
 
 const ListComponent: FC<ListProps> = ({id, listItems, title}) => {
+    const [isInputOpen, setIsInputOpen] = useState<boolean>(false);
+    const openTaskLayout = () => {
+        setIsInputOpen(true);
+    }
+
   return (
     <>  
         <Typography 
@@ -30,7 +36,7 @@ const ListComponent: FC<ListProps> = ({id, listItems, title}) => {
                 }}
             >
             {title}
-            <IconButton>
+            <IconButton onClick={openTaskLayout}>
                 <AddIcon/>
             </IconButton>
         </Typography>
@@ -47,10 +53,15 @@ const ListComponent: FC<ListProps> = ({id, listItems, title}) => {
                     overflow: 'auto',
                     }}
                     >
-                    {listItems.map(({title, id}, index) => (
-                        <ListItemComponent key={id} title={title} id={id} index={index}/>
+                    {
+                    listItems.map((item, index) => (
+                        <ListItemComponent key={item.id} title={item.title} id={+item.id} index={index}/>
                     ))}
                     {provided.placeholder}
+                    {
+                    isInputOpen &&
+                    <TaskCreator id={id} inputHandler={setIsInputOpen}/>
+                    }
                 </List>           
             )}
         </Droppable>
