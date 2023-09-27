@@ -1,8 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware'
 
-import nextId from 'react-id-generator';
-
 export interface ILsitItem {
     title: string,
     id: number
@@ -71,9 +69,7 @@ export const useListItems = create<ListItemsState>()(
                     return { columns: state.columns }
                 }
 
-                const [, taskId] = nextId().split('id');
-
-                const updatedListItems = [...columnForAdd.listItems, { title: title, id: +taskId }];
+                const updatedListItems = [...columnForAdd.listItems, { title: title, id: Date.now() }];
 
                 const updatedColumns = state.columns.map(column => {
                     if (column.id === columnForAdd.id) {
