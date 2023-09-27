@@ -17,6 +17,7 @@ interface LsitItemProps {
 
 const ListItemComponent: FC<LsitItemProps> = ({title, TaskId, index, columnId}) => {
     const deleteTask = useListItems(state => state.deleteTask);
+    const moveTaskToCompleted = useListItems(state => state.moveToCompleted);
   return (
     <Draggable draggableId={TaskId.toString()} index={index}>
         {(provided, snapshot) => (
@@ -38,7 +39,7 @@ const ListItemComponent: FC<LsitItemProps> = ({title, TaskId, index, columnId}) 
                         </Typography>
                     </CardContent>
                     <CardActions sx={{display: 'flex', justifyContent: 'space-between'}}>
-                        <IconButton color='success'>
+                        <IconButton color='success' onClick={() => moveTaskToCompleted(TaskId, columnId)}>
                             <CheckIcon/>
                         </IconButton>
                         <IconButton color='error' onClick={() => deleteTask(columnId, TaskId)}>

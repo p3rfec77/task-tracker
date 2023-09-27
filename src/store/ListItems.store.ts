@@ -17,6 +17,7 @@ interface ListItemsState {
     changeOrder: (draggableId: string, sourceIndex: number, sourceId: string, destinationIndex: number, destinationId: string) => void;
     addTask: (id: string, title: string) => void;
     deleteTask: (columnId: string, taskId: number) => void;
+    moveToCompleted: (taskid: number, columnId: string) => void;
 }
 
 export const useListItems = create<ListItemsState>()(
@@ -96,6 +97,28 @@ export const useListItems = create<ListItemsState>()(
                         return column;
                     }
                 })
+                return { columns: updatedColumns };
+            }),
+            moveToCompleted: (taskId, columnId) => set(state => {
+                const startColumn = state.columns.find(column => column.id === columnId) as IColumn;
+                const currentItem = startColumn?.listItems.find(item => item.id === taskId) as ILsitItem;
+
+                if (!startColumn && !currentItem) {
+                    return { columns: state.columns };
+                }
+
+                startColumn.listItems = startColumn.listItems.filter(item => item.id !== currentItem.id);
+
+                const updatedColumns = state.columns.map(column => {
+                    if (column.title.toLowerCase() === 'complete') {
+                        return { ...column, listItems: [...column.listItems, currentItem] };
+                    } else if (column.id === startColumn.id) {
+                        return startColumn;
+                    } else {
+                        return column;
+                    }
+                });
+
                 return { columns: updatedColumns };
             })
         }),
