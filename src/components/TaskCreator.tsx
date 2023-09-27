@@ -20,16 +20,22 @@ const TaskCreator: FC<TaskCreatorProps> = ({id, inputHandler}) => {
         setInput('');
     }
 
+    const createTaskByEnter = (e: React.KeyboardEvent<HTMLDivElement>) => {
+        if (e.key.toLowerCase() === 'enter') {
+            createTask();
+        }
+    }
+
   return (
     <Card sx={{ width: '100%' }}>
         <CardContent>
             <TextField
-            multiline
             autoFocus
             required
             variant='standard' 
             placeholder='write task...' 
             value={input} 
+            onKeyDown={(e) =>createTaskByEnter(e)}
             onChange={(e) => setInput(e.target.value)}/>
         </CardContent>
         <CardContent sx={{display: 'flex', justifyContent: 'space-between'}}>
