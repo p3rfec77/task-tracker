@@ -1,6 +1,7 @@
 import { FC, useState } from 'react';
 
-import {Card, CardActions, CardContent, Button, TextField} from '@mui/material';
+import {Card, CardActions, CardContent, Button, TextField, IconButton} from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
 
 import { useListItems } from '../store/ListItems.store';
 
@@ -23,14 +24,23 @@ const TaskCreator: FC<TaskCreatorProps> = ({id, inputHandler}) => {
     <Card sx={{ width: '100%' }}>
         <CardContent>
             <TextField
-             variant='standard' 
-             placeholder='write task...' 
-             value={input} 
-             onChange={(e) => setInput(e.target.value)}/>
+            autoFocus
+            required
+            variant='standard' 
+            placeholder='write task...' 
+            value={input} 
+            onChange={(e) => setInput(e.target.value)}/>
         </CardContent>
-        <CardActions>
-            <Button size="small" onClick={createTask}>Save</Button>
-        </CardActions>
+        <CardContent sx={{display: 'flex', justifyContent: 'space-between'}}>
+            <CardActions>
+                <Button disabled={input.length <= 0} type='submit' color='secondary' variant='contained' size="small" onClick={createTask}>Save</Button>
+            </CardActions>
+            <CardActions>
+                <IconButton color='error' onClick={() => inputHandler(false)}>
+                    <CloseIcon/>
+                </IconButton>
+            </CardActions>
+        </CardContent>
     </Card>
   )
 }
