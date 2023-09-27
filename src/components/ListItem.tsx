@@ -2,17 +2,23 @@ import {FC} from 'react'
 
 import { Draggable } from 'react-beautiful-dnd'
 
-import { ListItem, ListItemButton, ListItemText } from '@mui/material'
+import { useListItems } from '../store/ListItems.store';
+
+import { ListItem, Card, CardContent, Typography, CardActions, IconButton } from '@mui/material'
+import CheckIcon from '@mui/icons-material/Check';
+import CloseIcon from '@mui/icons-material/Close';
 
 interface LsitItemProps {
     title: string,
-    id: number,
-    index: number
+    TaskId: number,
+    index: number,
+    columnId: string
 }
 
-const ListItemComponent: FC<LsitItemProps> = ({title, id, index}) => {
+const ListItemComponent: FC<LsitItemProps> = ({title, TaskId, index, columnId}) => {
+    const deleteTask = useListItems(state => state.deleteTask);
   return (
-    <Draggable draggableId={id.toString()} index={index}>
+    <Draggable draggableId={TaskId.toString()} index={index}>
         {(provided, snapshot) => (
             <ListItem 
             disablePadding
@@ -25,9 +31,21 @@ const ListItemComponent: FC<LsitItemProps> = ({title, id, index}) => {
             {...provided.draggableProps} 
             ref={provided.innerRef} 
             >
-                <ListItemButton>
-                    <ListItemText primary={title} />
-                </ListItemButton>
+                <Card sx={{width: '100%'}}>
+                    <CardContent sx={{wordWrap: 'break-word'}}>
+                        <Typography>
+                            {title}
+                        </Typography>
+                    </CardContent>
+                    <CardActions sx={{display: 'flex', justifyContent: 'space-between'}}>
+                        <IconButton color='success'>
+                            <CheckIcon/>
+                        </IconButton>
+                        <IconButton color='error' onClick={() => deleteTask(columnId, TaskId)}>
+                            <CloseIcon/>
+                        </IconButton>
+                    </CardActions>
+                </Card>
             </ListItem>
         )}
     </Draggable>

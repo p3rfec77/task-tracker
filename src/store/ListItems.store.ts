@@ -18,6 +18,7 @@ interface ListItemsState {
     columns: IColumn[];
     changeOrder: (draggableId: string, sourceIndex: number, sourceId: string, destinationIndex: number, destinationId: string) => void;
     addTask: (id: string, title: string) => void;
+    deleteTask: (columnId: string, taskId: number) => void;
 }
 
 export const useListItems = create<ListItemsState>()(
@@ -82,6 +83,23 @@ export const useListItems = create<ListItemsState>()(
                     }
                 })
 
+                return { columns: updatedColumns };
+            }),
+            deleteTask: (columnId, taskId) => set(state => {
+                const columnFromDelete = state.columns.find(column => column.id === columnId);
+                if (!columnFromDelete) {
+                    return { columns: state.columns }
+                }
+
+                const updatedListItems = columnFromDelete?.listItems.filter(task => task.id !== taskId);
+
+                const updatedColumns = state.columns.map(column => {
+                    if (column.id === columnFromDelete.id) {
+                        return { ...column, listItems: updatedListItems };
+                    } else {
+                        return column;
+                    }
+                })
                 return { columns: updatedColumns };
             })
         }),

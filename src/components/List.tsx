@@ -55,7 +55,7 @@ const ListComponent: FC<ListProps> = ({id, listItems, title}) => {
                     >
                     {
                     listItems.map((item, index) => (
-                        <ListItemComponent key={item.id} title={item.title} id={+item.id} index={index}/>
+                        <ListItemComponent key={item.id} title={item.title} TaskId={item.id} columnId={id} index={index}/>
                     ))}
                     {provided.placeholder}
                     {
