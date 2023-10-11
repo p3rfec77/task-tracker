@@ -40,7 +40,7 @@ const TaskCreator: FC<TaskCreatorProps> = ({id, inputHandler}) => {
         </CardContent>
         <CardContent sx={{display: 'flex', justifyContent: 'space-between'}}>
             <CardActions>
-                <Button disabled={input.length <= 0} type='submit' color='secondary' variant='contained' size="small" onClick={createTask}>Save</Button>
+                <Button disabled={input.trim().length <= 0} type='submit' color='secondary' variant='contained' size="small" onClick={createTask}>Save</Button>
             </CardActions>
             <CardActions>
                 <IconButton color='error' onClick={() => inputHandler(false)}>

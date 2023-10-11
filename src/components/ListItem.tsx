@@ -32,7 +32,7 @@ const ListItemComponent: FC<LsitItemProps> = ({title, TaskId, index, columnId}) 
             {...provided.draggableProps} 
             ref={provided.innerRef} 
             >
-                <Card sx={{width: '100%'}}>
+                <Card sx={{width: '100%', cursor: 'pointer'}}>
                     <CardContent sx={{wordWrap: 'break-word'}}>
                         <Typography>
                             {title}
