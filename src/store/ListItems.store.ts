@@ -32,7 +32,19 @@ export const useListItems = create<ListItemsState>()(
                 },
                 {
                     id: 'column-3', title: 'complete', listItems: []
-                }
+                },
+                {
+                    id: 'column-4', title: 'yoooo', listItems: []
+                },
+                {
+                    id: 'column-5', title: 'yoooo', listItems: []
+                },
+                {
+                    id: 'column-6', title: 'yoooo', listItems: []
+                },
+                {
+                    id: 'column-7', title: 'yoooo', listItems: []
+                },
             ],
             changeOrder: (draggableId, sourceIndex, sourceId, destinationIndex, destinationId) => set(state => {
                 const startColumn = state.columns.find(column => sourceId === column.id) as IColumn;

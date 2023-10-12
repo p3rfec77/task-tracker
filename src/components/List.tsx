@@ -50,7 +50,6 @@ const ListComponent: FC<ListProps> = ({id, listItems, title}) => {
                     'rgba(235, 235, 235, 0.8)' : 
                     'white',
                     padding: '10px',
-                    overflow: 'auto',
                     }}
                     >
                     {

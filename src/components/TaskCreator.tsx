@@ -27,7 +27,7 @@ const TaskCreator: FC<TaskCreatorProps> = ({id, inputHandler}) => {
     }
 
   return (
-    <Card sx={{ width: '100%' }}>
+    <Card className='card' sx={{ width: '100%' }}>
         <CardContent>
             <TextField
             autoFocus
