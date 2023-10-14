@@ -10,26 +10,28 @@ const Test = () => {
     <Box 
     sx={{
       backgroundColor: 'rgba(255, 172, 215, 0.5)',
-      height: '100vh'
+      height: '100vh',
     }}>
         <Container sx={{
           display: 'flex', 
           gap: '15px', 
-          maxHeight: '100vh',
+          minHeight: '100vh',
           paddingTop: '50px', 
-          overflow: 'auto'
+          overflow: 'auto',
+          scrollBehavior: 'smooth',
         }}>
           {columns.map(column => (
             <Box 
             key={column.id} 
             sx={{ 
               minWidth: '25vw',
-              minHeight: '90vh',
+              maxHeight: '90vh',
               padding: '10px',
               bgcolor: 'background.paper',
               borderRadius: '10px', 
               overflow: 'auto',
               scrollbarGutter: 'stable',
+              scrollBehavior: 'smooth',
               '&::-webkit-scrollbar': {
                   width: '7px'
               },
