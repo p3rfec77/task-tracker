@@ -21,7 +21,7 @@ const TaskCreator: FC<TaskCreatorProps> = ({id, inputHandler}) => {
     }
 
     const createTaskByEnter = (e: React.KeyboardEvent<HTMLDivElement>) => {
-        if (e.key.toLowerCase() === 'enter') {
+        if (e.key.toLowerCase() === 'enter' && input.trim().length > 0) {
             createTask();
         }
     }
