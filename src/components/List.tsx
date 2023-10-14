@@ -1,6 +1,6 @@
 import {FC, useState} from 'react';
 
-import { IconButton, List, Typography} from '@mui/material';
+import { Box, IconButton, List, Typography} from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 
 import { ILsitItem } from '../store/ListItems.store';
@@ -8,6 +8,7 @@ import { Droppable } from 'react-beautiful-dnd';
 
 import ListItemComponent from './ListItem';
 import TaskCreator from './TaskCreator';
+import ListMenuBtn from './ListMenuBtn';
 
 interface ListProps {
     id: string,
@@ -36,9 +37,16 @@ const ListComponent: FC<ListProps> = ({id, listItems, title}) => {
                 }}
             >
             {title}
-            <IconButton onClick={openTaskLayout}>
-                <AddIcon/>
-            </IconButton>
+            <Box
+            sx={{
+                display: 'flex',
+            }}
+            >
+                <ListMenuBtn id={id}/>
+                <IconButton onClick={openTaskLayout}>
+                    <AddIcon/>
+                </IconButton>
+            </Box>
         </Typography>
         <Droppable droppableId={id}>
             {(provided, snapshot) => (
