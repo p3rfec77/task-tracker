@@ -1,11 +1,21 @@
+import { useState } from 'react';
+
 import { useListItems } from '../store/ListItems.store';
 
 import { Box, Container } from '@mui/material';
 
 import ListComponent from './List';
+import AddStatusButton from './AddStatusButton';
+import StatusCreator from './StatusCreator';
 
 const Test = () => {
     const columns = useListItems(state => state.columns);
+
+    const [isCreatingStatusOpen, setStatusOpen] = useState<boolean>(false);
+
+    const toggleStatus = () => setStatusOpen(!isCreatingStatusOpen);
+
+    console.log(isCreatingStatusOpen);
   return (
     <Box 
     sx={{
@@ -50,6 +60,7 @@ const Test = () => {
               <ListComponent listItems={column.listItems} id={column.id} title={column.title}/>
             </Box>
           ))}
+          {isCreatingStatusOpen ? <StatusCreator toggleStatus={toggleStatus}/> : <AddStatusButton changeStatus={toggleStatus}/>}
         </Container>
     </Box>
   )

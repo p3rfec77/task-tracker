@@ -18,6 +18,7 @@ interface ListItemsState {
     addTask: (id: string, title: string) => void;
     deleteTask: (columnId: string, taskId: number) => void;
     moveToCompleted: (taskid: number, columnId: string) => void;
+    addStatus: (status: string) => void,
 }
 
 export const useListItems = create<ListItemsState>()(
@@ -32,18 +33,6 @@ export const useListItems = create<ListItemsState>()(
                 },
                 {
                     id: 'column-3', title: 'complete', listItems: []
-                },
-                {
-                    id: 'column-4', title: 'yoooo', listItems: []
-                },
-                {
-                    id: 'column-5', title: 'yoooo', listItems: []
-                },
-                {
-                    id: 'column-6', title: 'yoooo', listItems: []
-                },
-                {
-                    id: 'column-7', title: 'yoooo', listItems: []
                 },
             ],
             changeOrder: (draggableId, sourceIndex, sourceId, destinationIndex, destinationId) => set(state => {
@@ -132,6 +121,12 @@ export const useListItems = create<ListItemsState>()(
                 });
 
                 return { columns: updatedColumns };
+            }),
+            addStatus: (status) => set(state => {
+                const [body, id] = state.columns[state.columns.length - 1].id.split('-');
+                const newId = `${body}-${+id + 1}`;
+                const newColumns = [...state.columns, { id: newId, title: status, listItems: [] }]
+                return { columns: newColumns }
             })
         }),
         { name: 'listItems' }
