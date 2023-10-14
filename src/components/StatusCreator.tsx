@@ -1,23 +1,31 @@
-import {useState, FC} from 'react'
+import {useState, FC, useRef} from 'react'
 
 import { Box, Button, TextField } from '@mui/material'
 
 import { useListItems } from '../store/ListItems.store';
+import useOutsideClick from '../hooks/useOutsideClick';
 
 interface StatusCreatorProps {
     toggleStatus: () => void;
+    isOpen: boolean;
 }
 
-const StatusCreator: FC<StatusCreatorProps> = ({toggleStatus}) => {
+const StatusCreator: FC<StatusCreatorProps> = ({toggleStatus, isOpen}) => {
     const [inputValue, setInputValue] = useState<string>('');
     const addStatus = useListItems(state => state.addStatus);
 
     const addAndChange = () => {
         addStatus(inputValue);
         toggleStatus();
-    }
+    };
+
+    const createStatusRef = useRef(null);
+    console.log('isOpen: ' + isOpen);
+     useOutsideClick(createStatusRef, toggleStatus, isOpen);
   return (
-    <Box sx={{
+    <Box
+    ref={createStatusRef}
+     sx={{
         maxHeight: '70px',
         minWidth: '25vw',
         marginBottom: '20px',

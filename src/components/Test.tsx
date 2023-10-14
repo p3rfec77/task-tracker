@@ -15,7 +15,6 @@ const Test = () => {
 
     const toggleStatus = () => setStatusOpen(!isCreatingStatusOpen);
 
-    console.log(isCreatingStatusOpen);
   return (
     <Box 
     sx={{
@@ -60,7 +59,7 @@ const Test = () => {
               <ListComponent listItems={column.listItems} id={column.id} title={column.title}/>
             </Box>
           ))}
-          {isCreatingStatusOpen ? <StatusCreator toggleStatus={toggleStatus}/> : <AddStatusButton changeStatus={toggleStatus}/>}
+          {isCreatingStatusOpen ? <StatusCreator isOpen={isCreatingStatusOpen} toggleStatus={toggleStatus}/> : <AddStatusButton changeStatus={toggleStatus}/>}
         </Container>
     </Box>
   )

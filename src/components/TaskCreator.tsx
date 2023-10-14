@@ -1,22 +1,24 @@
 import { FC, useState } from 'react';
 
-import {Card, CardActions, CardContent, Button, TextField, IconButton} from '@mui/material';
+import {Card, CardActions, CardContent, Button, TextField, IconButton,} from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 
 import { useListItems } from '../store/ListItems.store';
 
 interface TaskCreatorProps {
     id: string,
-    inputHandler: React.Dispatch<React.SetStateAction<boolean>>
+    inputHandler: () => void,
 }
 
 const TaskCreator: FC<TaskCreatorProps> = ({id, inputHandler}) => {
+
+
     const [input, setInput] = useState<string>('');
     const addTask = useListItems(state => state.addTask);
 
     const createTask = () => {
         addTask(id, input);
-        inputHandler(false);
+        inputHandler();
         setInput('');
     }
 
@@ -43,7 +45,7 @@ const TaskCreator: FC<TaskCreatorProps> = ({id, inputHandler}) => {
                 <Button disabled={input.trim().length <= 0} type='submit' color='secondary' variant='contained' size="small" onClick={createTask}>Save</Button>
             </CardActions>
             <CardActions>
-                <IconButton color='error' onClick={() => inputHandler(false)}>
+                <IconButton color='error' onClick={() => inputHandler()}>
                     <CloseIcon/>
                 </IconButton>
             </CardActions>
