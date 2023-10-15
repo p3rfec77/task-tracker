@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-const useOutsideClick = (elementRef: React.RefObject<HTMLUListElement>, handler: () => void, attached: boolean) => {
+const useOutsideClick = (elementRef: React.RefObject<HTMLDivElement>, handler: () => void, attached: boolean) => {
 
     useEffect(() => {
         if (!attached) return;
@@ -8,12 +8,13 @@ const useOutsideClick = (elementRef: React.RefObject<HTMLUListElement>, handler:
         const handleClick = (e: Event) => {
             if (!elementRef.current) return;
             const { target } = e;
-            console.log(attached);
-            console.log(handler);
             console.log((target as HTMLElement).nodeName);
             if (
                 !elementRef.current.contains(e.target as Node) &&
-                (target as HTMLElement).nodeName !== 'BUTTON'
+                (target as HTMLElement).nodeName.toLowerCase() !== 'button' &&
+                (target as HTMLElement).nodeName.toLowerCase() !== 'svg' &&
+                (target as HTMLElement).nodeName.toLowerCase() !== 'path'
+
             ) {
                 handler();
             }

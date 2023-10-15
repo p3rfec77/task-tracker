@@ -1,12 +1,10 @@
-import {FC, useRef, useState} from 'react';
+import {FC, useState} from 'react';
 
 import { Box, IconButton, List, Typography} from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 
 import { ILsitItem } from '../store/ListItems.store';
 import { Droppable } from 'react-beautiful-dnd';
-
-import useOutsideClick from '../hooks/useOutsideClick';
 
 import ListItemComponent from './ListItem';
 import TaskCreator from './TaskCreator';
@@ -19,18 +17,14 @@ interface ListProps {
 }
 
 const ListComponent: FC<ListProps> = ({id, listItems, title}) => {
-    const listRef = useRef<HTMLUListElement>(null)
     const [isInputOpen, setIsInputOpen] = useState<boolean>(false);
     const handleInput = () => {
         setIsInputOpen(!isInputOpen);
     }
 
-        useOutsideClick(listRef, handleInput, isInputOpen);
-
   return (
     <>  
         <Typography
-            ref={listRef}
             variant='h5' 
             sx={{
                 marginBottom: '20px',
@@ -49,7 +43,7 @@ const ListComponent: FC<ListProps> = ({id, listItems, title}) => {
             }}
             >
                 <ListMenuBtn id={id}/>
-                <IconButton onClick={handleInput}>
+                <IconButton type='button' onClick={handleInput}>
                     <AddIcon/>
                 </IconButton>
             </Box>
@@ -73,7 +67,7 @@ const ListComponent: FC<ListProps> = ({id, listItems, title}) => {
                     {provided.placeholder}
                     {
                     isInputOpen &&
-                    <TaskCreator id={id} inputHandler={handleInput}/>
+                    <TaskCreator inputStatus={isInputOpen} id={id} inputHandler={handleInput}/>
                     }
                 </List>           
             )}
