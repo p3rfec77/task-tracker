@@ -4,9 +4,9 @@ import { useListItems } from "../store/ListItems.store";
 
 import { Box } from "@mui/material";
 
-import ListComponent from "./List";
 import AddStatusButton from "./AddStatusButton";
 import StatusCreator from "./StatusCreator";
+import StatusColumn from "./StatusColumn";
 
 const Test = () => {
   const columns = useListItems((state) => state.columns);
@@ -34,38 +34,12 @@ const Test = () => {
         }}
       >
         {columns.map((column) => (
-          <Box
+          <StatusColumn
+            id={column.id}
+            listItems={column.listItems}
+            title={column.title}
             key={column.id}
-            sx={{
-              minWidth: "25vw",
-              maxHeight: "90vh",
-              padding: "10px",
-              bgcolor: "background.paper",
-              borderRadius: "10px",
-              overflow: "auto",
-              scrollbarGutter: "stable",
-              scrollBehavior: "smooth",
-              "&::-webkit-scrollbar": {
-                width: "7px",
-              },
-              "&::-webkit-scrollbar-track": {
-                margin: "5px 0px",
-                backgroundColor: "transparent",
-                borderRadius: 3,
-              },
-              "&::-webkit-scrollbar-thumb": {
-                width: "7px",
-                borderRadius: 3,
-                backgroundColor: "rgba(0, 0, 0, 0.2)",
-              },
-            }}
-          >
-            <ListComponent
-              listItems={column.listItems}
-              id={column.id}
-              title={column.title}
-            />
-          </Box>
+          />
         ))}
         {isCreatingStatusOpen ? (
           <StatusCreator
