@@ -15,7 +15,8 @@ const useOutsideClick = (
         !elementRef.current.contains(e.target as Node) &&
         (target as HTMLElement).nodeName.toLowerCase() !== "button" &&
         (target as HTMLElement).nodeName.toLowerCase() !== "svg" &&
-        (target as HTMLElement).nodeName.toLowerCase() !== "path"
+        (target as HTMLElement).nodeName.toLowerCase() !== "path" &&
+        (target as HTMLElement).nodeName.toLowerCase() !== "h5"
       ) {
         handler();
       }

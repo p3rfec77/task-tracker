@@ -15,6 +15,7 @@ interface ListItemsState {
   deleteTask: (columnId: string, taskId: number) => void;
   addStatus: (status: string) => void;
   removeStatus: (id: string) => void;
+  changeStatus: (id: string, title: string) => void;
 }
 
 export const useListItems = create<ListItemsState>()(
@@ -143,6 +144,15 @@ export const useListItems = create<ListItemsState>()(
         set((state) => {
           return {
             columns: state.columns.filter((column) => column.id !== id),
+          };
+        }),
+      changeStatus: (id, title) =>
+        set((state) => {
+          const refreshColumns = state.columns.map((column) =>
+            column.id === id ? { ...column, title: title } : column
+          );
+          return {
+            columns: refreshColumns,
           };
         }),
     }),
