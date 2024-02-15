@@ -20,14 +20,13 @@ const StatusCreator: FC<StatusCreatorProps> = ({ toggleStatus, isOpen }) => {
   };
 
   const createStatusRef = useRef(null);
-  console.log("isOpen: " + isOpen);
   useOutsideClick(createStatusRef, toggleStatus, isOpen);
   return (
     <Box
       ref={createStatusRef}
       sx={{
         maxHeight: "70px",
-        minWidth: "25vw",
+        minWidth: "350px",
         marginBottom: "20px",
         padding: "10px 10px",
         display: "flex",

@@ -9,8 +9,8 @@ const StatusColumn = ({ id, listItems, title }: StatusColumnProps) => {
     <Box
       key={id}
       sx={{
-        minWidth: "25vw",
-        maxHeight: "90vh",
+        minWidth: "350px",
+        maxHeight: "100%",
         padding: "10px",
         bgcolor: "background.paper",
         borderRadius: "10px",

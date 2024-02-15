@@ -20,15 +20,15 @@ const Test = () => {
       sx={{
         backgroundColor: "rgba(255, 172, 215, 0.5)",
         height: "100vh",
-        padding: "0px 100px",
+        padding: "50px 100px",
       }}
     >
       <Box
         sx={{
           display: "flex",
           gap: "15px",
-          minHeight: "100vh",
-          paddingTop: "50px",
+          paddingBottom: "20px",
+          height: "100%",
           overflow: "auto",
           scrollBehavior: "smooth",
         }}

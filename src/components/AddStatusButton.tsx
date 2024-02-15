@@ -11,7 +11,7 @@ const AddStatusButton: FC<AddStatusButtonProps> = ({ changeStatus }) => {
       onClick={changeStatus}
       sx={{
         maxHeight: "68px",
-        minWidth: "25vw",
+        minWidth: "350px",
         backgroundColor: "transparent",
         boxShadow: "rgba(0, 0, 0, 0.35) 0px 2px 5px",
         padding: "10px 10px",
