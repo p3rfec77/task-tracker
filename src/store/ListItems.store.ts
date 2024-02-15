@@ -1,16 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-
-export interface ILsitItem {
-  title: string;
-  id: number;
-}
-
-export interface IColumn {
-  id: string;
-  title: string;
-  listItems: ILsitItem[];
-}
+import { IColumn, ILsitItem } from "../types";
 
 interface ListItemsState {
   columns: IColumn[];

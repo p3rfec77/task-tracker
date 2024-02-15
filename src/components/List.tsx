@@ -3,7 +3,7 @@ import { FC, useState } from "react";
 import { Box, IconButton, List, Typography } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 
-import { ILsitItem } from "../store/ListItems.store";
+import { ILsitItem } from "../types";
 import { Droppable } from "react-beautiful-dnd";
 
 import ListItemComponent from "./ListItem";
