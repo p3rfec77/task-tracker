@@ -1,8 +1,8 @@
 import { DragDropContext, DropResult } from "react-beautiful-dnd";
 
-import Test from "./components/Test";
+import Test from "../components/Test";
 
-import { useListItems } from "./store/ListItems.store";
+import { useListItems } from "../store/ListItems.store";
 
 function App() {
   const changeOrder = useListItems((state) => state.changeOrder);
