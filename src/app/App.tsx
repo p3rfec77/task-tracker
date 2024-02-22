@@ -1,12 +1,17 @@
-import { DragDropContext, DropResult } from "react-beautiful-dnd";
-
-import Test from "../components/Test";
+import { useState } from "react";
 
 import { useListItems } from "../store/ListItems.store";
 
+import { Box } from "@mui/material";
+
+import AddStatusButton from "../components/AddStatusButton";
+import StatusCreator from "../components/StatusCreator";
+import StatusColumn from "../components/StatusColumn";
+
+import { DragDropContext, DropResult } from "react-beautiful-dnd";
+
 function App() {
   const changeOrder = useListItems((state) => state.changeOrder);
-
   const onDragEnd = (result: DropResult): void => {
     const { draggableId, source, destination } = result;
 
@@ -21,9 +26,46 @@ function App() {
     );
   };
 
+  const columns = useListItems((state) => state.columns);
+
+  const [isCreatingStatusOpen, setStatusOpen] = useState<boolean>(false);
+
+  const toggleCreateStatusInput = () => setStatusOpen((prev) => !prev);
+
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      <Test />
+      <Box
+        sx={{
+          backgroundColor: "rgba(255, 172, 215, 0.5)",
+          height: "100vh",
+          padding: "50px 100px",
+        }}
+      >
+        <Box
+          sx={{
+            display: "flex",
+            gap: "15px",
+            paddingBottom: "20px",
+            height: "100%",
+            overflow: "auto",
+            scrollBehavior: "smooth",
+          }}
+        >
+          {columns.map((column) => (
+            <StatusColumn
+              id={column.id}
+              listItems={column.listItems}
+              title={column.title}
+              key={column.id}
+            />
+          ))}
+          {isCreatingStatusOpen ? (
+            <StatusCreator toggleStatusInput={toggleCreateStatusInput} />
+          ) : (
+            <AddStatusButton toggleStatusInput={toggleCreateStatusInput} />
+          )}
+        </Box>
+      </Box>
     </DragDropContext>
   );
 }
