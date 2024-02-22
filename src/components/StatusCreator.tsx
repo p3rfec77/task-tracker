@@ -6,20 +6,20 @@ import { useListItems } from "../store/ListItems.store";
 import { useClickAway } from "react-use";
 
 interface StatusCreatorProps {
-  toggleStatus: () => void;
+  toggleStatusInput: () => void;
 }
 
-const StatusCreator: FC<StatusCreatorProps> = ({ toggleStatus }) => {
+const StatusCreator: FC<StatusCreatorProps> = ({ toggleStatusInput }) => {
   const [inputValue, setInputValue] = useState<string>("");
   const addStatus = useListItems((state) => state.addStatus);
 
   const addAndChange = () => {
     addStatus(inputValue);
-    toggleStatus();
+    toggleStatusInput();
   };
 
   const createStatusRef = useRef(null);
-  useClickAway(createStatusRef, toggleStatus);
+  useClickAway(createStatusRef, toggleStatusInput);
   return (
     <Box
       ref={createStatusRef}

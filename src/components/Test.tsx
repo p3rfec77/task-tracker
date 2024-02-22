@@ -13,7 +13,7 @@ const Test = () => {
 
   const [isCreatingStatusOpen, setStatusOpen] = useState<boolean>(false);
 
-  const toggleStatus = () => setStatusOpen(!isCreatingStatusOpen);
+  const toggleCreateStatusInput = () => setStatusOpen((prev) => !prev);
 
   return (
     <Box
@@ -42,9 +42,9 @@ const Test = () => {
           />
         ))}
         {isCreatingStatusOpen ? (
-          <StatusCreator toggleStatus={toggleStatus} />
+          <StatusCreator toggleStatusInput={toggleCreateStatusInput} />
         ) : (
-          <AddStatusButton changeStatus={toggleStatus} />
+          <AddStatusButton toggleStatusInput={toggleCreateStatusInput} />
         )}
       </Box>
     </Box>

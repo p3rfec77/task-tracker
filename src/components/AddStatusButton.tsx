@@ -2,13 +2,13 @@ import { FC } from "react";
 import { Button } from "@mui/material";
 
 interface AddStatusButtonProps {
-  changeStatus: () => void;
+  toggleStatusInput: () => void;
 }
 
-const AddStatusButton: FC<AddStatusButtonProps> = ({ changeStatus }) => {
+const AddStatusButton: FC<AddStatusButtonProps> = ({ toggleStatusInput }) => {
   return (
     <Button
-      onClick={changeStatus}
+      onClick={toggleStatusInput}
       sx={{
         maxHeight: "68px",
         minWidth: "350px",

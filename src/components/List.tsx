@@ -21,9 +21,9 @@ interface ListProps {
 }
 
 const ListComponent: FC<ListProps> = ({ id, listItems, title }) => {
-  const [isInputOpen, setIsInputOpen] = useState<boolean>(false);
-  const handleInput = () => {
-    setIsInputOpen(!isInputOpen);
+  const [isCreateTaskOpen, SetisCreateTaskOpen] = useState<boolean>(false);
+  const handleCreateTask = () => {
+    SetisCreateTaskOpen((prev) => !prev);
   };
 
   const changeStatus = useListItems((state) => state.changeStatus);
@@ -78,7 +78,7 @@ const ListComponent: FC<ListProps> = ({ id, listItems, title }) => {
           }}
         >
           <ListMenuBtn id={id} />
-          <IconButton type="button" onClick={handleInput}>
+          <IconButton type="button" onClick={handleCreateTask}>
             <AddIcon />
           </IconButton>
         </Box>
@@ -105,7 +105,9 @@ const ListComponent: FC<ListProps> = ({ id, listItems, title }) => {
               />
             ))}
             {provided.placeholder}
-            {isInputOpen && <TaskCreator id={id} inputHandler={handleInput} />}
+            {isCreateTaskOpen && (
+              <TaskCreator id={id} inputHandler={handleCreateTask} />
+            )}
           </List>
         )}
       </Droppable>
