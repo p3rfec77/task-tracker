@@ -42,10 +42,7 @@ const Test = () => {
           />
         ))}
         {isCreatingStatusOpen ? (
-          <StatusCreator
-            isOpen={isCreatingStatusOpen}
-            toggleStatus={toggleStatus}
-          />
+          <StatusCreator toggleStatus={toggleStatus} />
         ) : (
           <AddStatusButton changeStatus={toggleStatus} />
         )}

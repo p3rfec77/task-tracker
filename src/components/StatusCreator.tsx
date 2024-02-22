@@ -3,14 +3,13 @@ import { useState, FC, useRef } from "react";
 import { Box, Button, TextField } from "@mui/material";
 
 import { useListItems } from "../store/ListItems.store";
-import useOutsideClick from "../hooks/useOutsideClick";
+import { useClickAway } from "react-use";
 
 interface StatusCreatorProps {
   toggleStatus: () => void;
-  isOpen: boolean;
 }
 
-const StatusCreator: FC<StatusCreatorProps> = ({ toggleStatus, isOpen }) => {
+const StatusCreator: FC<StatusCreatorProps> = ({ toggleStatus }) => {
   const [inputValue, setInputValue] = useState<string>("");
   const addStatus = useListItems((state) => state.addStatus);
 
@@ -20,7 +19,7 @@ const StatusCreator: FC<StatusCreatorProps> = ({ toggleStatus, isOpen }) => {
   };
 
   const createStatusRef = useRef(null);
-  useOutsideClick(createStatusRef, toggleStatus, isOpen);
+  useClickAway(createStatusRef, toggleStatus);
   return (
     <Box
       ref={createStatusRef}

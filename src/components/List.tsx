@@ -1,12 +1,13 @@
 import { FC, useRef, useState } from "react";
 
+import { useClickAway } from "react-use";
+
 import { Box, IconButton, List, TextField, Typography } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 
 import { ILsitItem } from "../types";
 import { Droppable } from "react-beautiful-dnd";
 
-import useOutsideClick from "../hooks/useOutsideClick";
 import { useListItems } from "../store/ListItems.store";
 
 import ListItemComponent from "./ListItem";
@@ -21,28 +22,23 @@ interface ListProps {
 
 const ListComponent: FC<ListProps> = ({ id, listItems, title }) => {
   const [isInputOpen, setIsInputOpen] = useState<boolean>(false);
-  const [isChangingStatus, setIsChangingStatus] = useState<boolean>(false);
-  const changingStatusRef = useRef<HTMLInputElement>(null);
+  const handleInput = () => {
+    setIsInputOpen(!isInputOpen);
+  };
 
   const changeStatus = useListItems((state) => state.changeStatus);
-
   const renameStatus = (
-    e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement, Element>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     if (e.target.value.trim() !== "") {
       changeStatus(id, e.target.value);
     }
   };
 
-  const handleInput = () => {
-    setIsInputOpen(!isInputOpen);
-  };
+  const [isChangingStatus, setIsChangingStatus] = useState<boolean>(false);
+  const changingStatusRef = useRef<HTMLDivElement>(null);
 
-  const toggleIsChanging = () => {
-    setIsChangingStatus(!isChangingStatus);
-  };
-
-  useOutsideClick(changingStatusRef, toggleIsChanging, isChangingStatus);
+  useClickAway(changingStatusRef, () => setIsChangingStatus(false));
 
   return (
     <>
@@ -64,10 +60,15 @@ const ListComponent: FC<ListProps> = ({ id, listItems, title }) => {
             autoFocus
             variant="standard"
             sx={{ Height: "303px" }}
-            onBlur={(e) => renameStatus(e)}
+            onChange={(e) => renameStatus(e)}
           />
         ) : (
-          <Typography onClick={toggleIsChanging} variant="h5">
+          <Typography
+            onClick={() => {
+              setIsChangingStatus(true);
+            }}
+            variant="h5"
+          >
             {title}
           </Typography>
         )}
@@ -104,13 +105,7 @@ const ListComponent: FC<ListProps> = ({ id, listItems, title }) => {
               />
             ))}
             {provided.placeholder}
-            {isInputOpen && (
-              <TaskCreator
-                inputStatus={isInputOpen}
-                id={id}
-                inputHandler={handleInput}
-              />
-            )}
+            {isInputOpen && <TaskCreator id={id} inputHandler={handleInput} />}
           </List>
         )}
       </Droppable>

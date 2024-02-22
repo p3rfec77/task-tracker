@@ -1,5 +1,7 @@
 import { FC, useRef, useState } from "react";
 
+import { useClickAway } from "react-use";
+
 import {
   Card,
   CardActions,
@@ -11,19 +13,13 @@ import {
 import CloseIcon from "@mui/icons-material/Close";
 
 import { useListItems } from "../store/ListItems.store";
-import useOutsideClick from "../hooks/useOutsideClick";
 
 interface TaskCreatorProps {
   id: string;
-  inputStatus: boolean;
   inputHandler: () => void;
 }
 
-const TaskCreator: FC<TaskCreatorProps> = ({
-  id,
-  inputHandler,
-  inputStatus,
-}) => {
+const TaskCreator: FC<TaskCreatorProps> = ({ id, inputHandler }) => {
   const taskCreatorRef = useRef<HTMLDivElement>(null);
 
   const [input, setInput] = useState<string>("");
@@ -41,7 +37,7 @@ const TaskCreator: FC<TaskCreatorProps> = ({
     }
   };
 
-  useOutsideClick(taskCreatorRef, inputHandler, inputStatus);
+  useClickAway(taskCreatorRef, inputHandler);
 
   return (
     <Card ref={taskCreatorRef} className="card" sx={{ width: "100%" }}>
@@ -70,7 +66,7 @@ const TaskCreator: FC<TaskCreatorProps> = ({
           </Button>
         </CardActions>
         <CardActions>
-          <IconButton color="error" onClick={() => inputHandler()}>
+          <IconButton color="error" onClick={inputHandler}>
             <CloseIcon />
           </IconButton>
         </CardActions>
