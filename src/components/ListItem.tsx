@@ -35,6 +35,7 @@ const ListItemComponent: FC<LsitItemProps> = ({
         <ListItem
           disablePadding
           sx={{
+            width: "303px",
             background: snapshot.isDragging ? "rgba(0, 0, 0, 0.2)" : "white",
             marginBottom: "10px",
             boxShadow: "rgba(0, 0, 0, 0.35) 0px 2px 5px",
