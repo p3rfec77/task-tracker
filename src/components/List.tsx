@@ -57,6 +57,7 @@ const ListComponent: FC<ListProps> = ({ id, listItems, title }) => {
       >
         {isChangingStatus ? (
           <TextField
+            multiline
             ref={changingStatusRef}
             autoFocus
             variant="standard"
@@ -65,6 +66,10 @@ const ListComponent: FC<ListProps> = ({ id, listItems, title }) => {
           />
         ) : (
           <Typography
+            sx={{
+              width: "220px",
+              wordWrap: "break-word",
+            }}
             onClick={() => {
               setIsChangingStatus(true);
             }}
@@ -76,6 +81,7 @@ const ListComponent: FC<ListProps> = ({ id, listItems, title }) => {
         <Box
           sx={{
             display: "flex",
+            height: "40px",
           }}
         >
           <ListMenuBtn id={id} />

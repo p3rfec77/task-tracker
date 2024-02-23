@@ -30,7 +30,7 @@ const ListMenuBtn: FC<ListMenuBtnProps> = ({ id }) => {
   };
 
   return (
-    <div>
+    <>
       <IconButton
         id="basic-button"
         aria-controls={open ? "basic-menu" : undefined}
@@ -53,7 +53,7 @@ const ListMenuBtn: FC<ListMenuBtnProps> = ({ id }) => {
           Delete
         </MenuItem>
       </Menu>
-    </div>
+    </>
   );
 };
 
