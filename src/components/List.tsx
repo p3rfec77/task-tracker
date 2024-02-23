@@ -44,6 +44,7 @@ const ListComponent: FC<ListProps> = ({ id, listItems, title }) => {
     <>
       <Box
         sx={{
+          width: "100%",
           marginBottom: "20px",
           backgroundColor: "white",
           boxShadow: "rgba(0, 0, 0, 0.35) 0px 2px 5px",
