@@ -12,6 +12,8 @@ import { DragDropContext, DropResult } from "react-beautiful-dnd";
 
 function App() {
   const changeOrder = useListItems((state) => state.changeOrder);
+  const columns = useListItems((state) => state.columns);
+
   const onDragEnd = (result: DropResult): void => {
     const { draggableId, source, destination } = result;
 
@@ -26,10 +28,7 @@ function App() {
     );
   };
 
-  const columns = useListItems((state) => state.columns);
-
   const [isCreatingStatusOpen, setStatusOpen] = useState<boolean>(false);
-
   const toggleCreateStatusInput = () => setStatusOpen((prev) => !prev);
 
   return (
