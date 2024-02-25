@@ -18,6 +18,12 @@ const StatusCreator: FC<StatusCreatorProps> = ({ toggleStatusInput }) => {
     toggleStatusInput();
   };
 
+  const addByEnter = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key.toLowerCase() === "enter" && inputValue.trim().length > 0) {
+      addAndChange();
+    }
+  };
+
   const createStatusRef = useRef(null);
   useClickAway(createStatusRef, toggleStatusInput);
   return (
@@ -39,6 +45,7 @@ const StatusCreator: FC<StatusCreatorProps> = ({ toggleStatusInput }) => {
       <TextField
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
+        onKeyDown={(e) => addByEnter(e)}
         autoFocus
         sx={{
           borderRadius: "7px",
