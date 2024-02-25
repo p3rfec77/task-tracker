@@ -20,18 +20,19 @@ const ColumnHeader: FC<ColumnHeaderProps> = ({
   handleCreateTask,
 }) => {
   const changeStatus = useListItems((state) => state.changeStatus);
-  const renameStatus = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    if (e.target.value.trim() !== "") {
-      changeStatus(id, e.target.value);
+  const [inputState, setInputState] = useState<string>("");
+  const renameStatus = () => {
+    if (inputState.trim() !== "") {
+      changeStatus(id, inputState);
     }
+    setIsChangingStatus(false);
+    setInputState("");
   };
 
   const [isChangingStatus, setIsChangingStatus] = useState<boolean>(false);
   const changingStatusRef = useRef<HTMLDivElement>(null);
 
-  useClickAway(changingStatusRef, () => setIsChangingStatus(false));
+  useClickAway(changingStatusRef, renameStatus);
   return (
     <Box
       sx={{
@@ -48,13 +49,14 @@ const ColumnHeader: FC<ColumnHeaderProps> = ({
     >
       {isChangingStatus ? (
         <TextField
+          value={inputState}
           multiline
           ref={changingStatusRef}
           autoFocus
           variant="standard"
           sx={{ Height: "303px" }}
-          onChange={(e) => renameStatus(e)}
-          onKeyDown={(e) => e.key === "Enter" && setIsChangingStatus(false)}
+          onChange={(e) => setInputState(e.target.value)}
+          onKeyDown={(e) => e.key === "Enter" && renameStatus()}
         />
       ) : (
         <Typography
