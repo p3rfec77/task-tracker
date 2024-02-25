@@ -54,6 +54,7 @@ const ColumnHeader: FC<ColumnHeaderProps> = ({
           variant="standard"
           sx={{ Height: "303px" }}
           onChange={(e) => renameStatus(e)}
+          onKeyDown={(e) => e.key === "Enter" && setIsChangingStatus(false)}
         />
       ) : (
         <Typography
