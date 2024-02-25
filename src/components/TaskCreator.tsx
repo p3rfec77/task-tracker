@@ -43,6 +43,7 @@ const TaskCreator: FC<TaskCreatorProps> = ({ id, inputHandler }) => {
     <Card ref={taskCreatorRef} className="card" sx={{ width: "100%" }}>
       <CardContent data-taskcreator={true}>
         <TextField
+          multiline
           autoFocus
           required
           variant="standard"
