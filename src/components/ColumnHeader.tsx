@@ -55,6 +55,7 @@ const ColumnHeader: FC<ColumnHeaderProps> = ({
           autoFocus
           variant="standard"
           sx={{ Height: "303px" }}
+          onFocus={(e) => e.target.select()}
           onChange={(e) => setInputState(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && renameStatus()}
         />
@@ -65,6 +66,7 @@ const ColumnHeader: FC<ColumnHeaderProps> = ({
             wordWrap: "break-word",
           }}
           onClick={() => {
+            setInputState(title);
             setIsChangingStatus(true);
           }}
           variant="h5"
