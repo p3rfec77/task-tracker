@@ -94,7 +94,7 @@ export const useListItems = create<ListItemsState>()(
 
           const updatedListItems = [
             ...columnForAdd.listItems,
-            { title: title, id: Date.now() },
+            { title: title, id: Date.now(), description: "" },
           ];
 
           const updatedColumns = state.columns.map((column) => {

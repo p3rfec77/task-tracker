@@ -11,10 +11,11 @@ import {
   Typography,
   CardActions,
   IconButton,
-  Box,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
+
 import PopupModal from "./PopupModal";
+import TaskInfo from "./TaskInfo";
 
 interface LsitItemProps {
   title: string;
@@ -69,9 +70,7 @@ const ListItemComponent: FC<LsitItemProps> = ({
         )}
       </Draggable>
       <PopupModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-        <Box sx={{ height: "200px", width: "200px", background: "white" }}>
-          <p>aaaaaaaaaaa</p>
-        </Box>
+        <TaskInfo title={title} />
       </PopupModal>
     </>
   );
