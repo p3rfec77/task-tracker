@@ -1,14 +1,28 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 
 import { Box, Grow, Typography, TextField } from "@mui/material";
 import DescriptionIcon from "@mui/icons-material/Description";
 
+import { useListItems } from "../store/ListItems.store";
+
 interface TaskInfoProps {
+  id: number;
   title: string;
   description: string;
 }
 
-const TaskInfo: FC<TaskInfoProps> = ({ title, description }) => {
+const TaskInfo: FC<TaskInfoProps> = ({ id, title, description }) => {
+  const [descriptionInput, setDescriptionInput] = useState<string>("");
+  const [isDescriptionOpen, setIsDescriptionOpen] = useState<boolean>(true);
+  const changeDescription = useListItems((state) => state.changeDescription);
+
+  const saveDescription = () => {
+    if (descriptionInput.trim().length > 0) {
+      changeDescription(id, descriptionInput);
+      setIsDescriptionOpen(false);
+    }
+  };
+
   return (
     <Grow in>
       <Box
@@ -34,15 +48,25 @@ const TaskInfo: FC<TaskInfoProps> = ({ title, description }) => {
             <DescriptionIcon sx={{ marginRight: "5px" }} fontSize="large" />
             description:
           </Typography>
-          <TextField
-            value={description}
-            placeholder="add description..."
-            margin="normal"
-            variant="outlined"
-            fullWidth
-            multiline
-            minRows={5}
-          />
+          {isDescriptionOpen || descriptionInput.trim().length === 0 ? (
+            <TextField
+              value={descriptionInput}
+              placeholder="add description..."
+              margin="normal"
+              variant="outlined"
+              fullWidth
+              autoFocus
+              multiline
+              minRows={5}
+              onFocus={(e) => e.target.select()}
+              onBlur={saveDescription}
+              onChange={(e) => setDescriptionInput(e.target.value)}
+            />
+          ) : (
+            <Typography onClick={() => setIsDescriptionOpen(true)}>
+              {description}
+            </Typography>
+          )}
         </Box>
       </Box>
     </Grow>

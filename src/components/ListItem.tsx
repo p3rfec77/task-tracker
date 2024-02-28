@@ -19,6 +19,7 @@ import TaskInfo from "./TaskInfo";
 
 interface LsitItemProps {
   title: string;
+  description: string;
   TaskId: number;
   index: number;
   columnId: string;
@@ -26,6 +27,7 @@ interface LsitItemProps {
 
 const ListItemComponent: FC<LsitItemProps> = ({
   title,
+  description,
   TaskId,
   index,
   columnId,
@@ -70,7 +72,7 @@ const ListItemComponent: FC<LsitItemProps> = ({
         )}
       </Draggable>
       <PopupModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-        <TaskInfo title={title} />
+        <TaskInfo id={TaskId} title={title} description={description} />
       </PopupModal>
     </>
   );

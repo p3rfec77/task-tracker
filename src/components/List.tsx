@@ -40,6 +40,7 @@ const ListComponent: FC<ListProps> = ({ id, listItems, title }) => {
               <ListItemComponent
                 key={item.id}
                 title={item.title}
+                description={item.description}
                 TaskId={item.id}
                 columnId={id}
                 index={index}
