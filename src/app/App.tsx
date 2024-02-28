@@ -37,7 +37,7 @@ function App() {
         sx={{
           backgroundColor: "rgba(255, 172, 215, 0.5)",
           height: "100vh",
-          padding: "50px 100px",
+          padding: "50px 0px 50px 100px",
         }}
       >
         <Box

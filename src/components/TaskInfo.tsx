@@ -33,7 +33,11 @@ const TaskInfo: FC<TaskInfoProps> = ({ id, title, description }) => {
           borderRadius: "20px",
         }}
       >
-        <Typography fontSize={"40px"} variant="h6">
+        <Typography
+          sx={{ wordWrap: "break-word" }}
+          fontSize={"40px"}
+          variant="h6"
+        >
           {title}
         </Typography>
 
@@ -75,7 +79,10 @@ const TaskInfo: FC<TaskInfoProps> = ({ id, title, description }) => {
                 fontSize: "20px",
                 cursor: "pointer",
               }}
-              onClick={() => setIsDescriptionOpen(true)}
+              onClick={() => {
+                setDescriptionInput(description);
+                setIsDescriptionOpen(true);
+              }}
             >
               {description}
             </Typography>
