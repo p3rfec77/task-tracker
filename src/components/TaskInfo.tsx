@@ -13,7 +13,7 @@ interface TaskInfoProps {
 
 const TaskInfo: FC<TaskInfoProps> = ({ id, title, description }) => {
   const [descriptionInput, setDescriptionInput] = useState<string>("");
-  const [isDescriptionOpen, setIsDescriptionOpen] = useState<boolean>(true);
+  const [isDescriptionOpen, setIsDescriptionOpen] = useState<boolean>(false);
   const changeDescription = useListItems((state) => state.changeDescription);
 
   const saveDescription = () => {
@@ -48,22 +48,35 @@ const TaskInfo: FC<TaskInfoProps> = ({ id, title, description }) => {
             <DescriptionIcon sx={{ marginRight: "5px" }} fontSize="large" />
             description:
           </Typography>
-          {isDescriptionOpen || descriptionInput.trim().length === 0 ? (
+          {isDescriptionOpen || description.trim().length === 0 ? (
             <TextField
               value={descriptionInput}
               placeholder="add description..."
+              color="secondary"
               margin="normal"
               variant="outlined"
               fullWidth
               autoFocus
               multiline
               minRows={5}
-              onFocus={(e) => e.target.select()}
               onBlur={saveDescription}
               onChange={(e) => setDescriptionInput(e.target.value)}
             />
           ) : (
-            <Typography onClick={() => setIsDescriptionOpen(true)}>
+            <Typography
+              variant="body1"
+              bgcolor={"secondary.light"}
+              color={"black"}
+              sx={{
+                marginTop: "20px",
+                padding: "20px",
+                borderRadius: "10px",
+                whiteSpace: "pre-wrap",
+                fontSize: "20px",
+                cursor: "pointer",
+              }}
+              onClick={() => setIsDescriptionOpen(true)}
+            >
               {description}
             </Typography>
           )}
