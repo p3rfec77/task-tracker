@@ -17,6 +17,7 @@ interface ListItemsState {
   removeStatus: (id: string) => void;
   changeStatus: (id: string, title: string) => void;
   changeDescription: (id: number, description: string) => void;
+  changeTaskName: (id: number, title: string) => void;
 }
 
 export const useListItems = create<ListItemsState>()(
@@ -165,6 +166,22 @@ export const useListItems = create<ListItemsState>()(
               column.listItems = column.listItems.map((listItem) => {
                 if (listItem.id === id) {
                   return { ...listItem, description: description };
+                } else {
+                  return listItem;
+                }
+              });
+
+              return column;
+            });
+
+            return { columns: refreshColumns };
+          }),
+        changeTaskName: (id, title) =>
+          set((state) => {
+            const refreshColumns = state.columns.map((column) => {
+              column.listItems = column.listItems.map((listItem) => {
+                if (listItem.id === id) {
+                  return { ...listItem, title: title };
                 } else {
                   return listItem;
                 }

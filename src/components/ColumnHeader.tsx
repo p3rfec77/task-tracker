@@ -49,12 +49,13 @@ const ColumnHeader: FC<ColumnHeaderProps> = ({
     >
       {isChangingStatus ? (
         <TextField
+          inputProps={{ style: { fontSize: "1.5rem" } }}
           value={inputState}
           multiline
           ref={changingStatusRef}
           autoFocus
           variant="standard"
-          sx={{ Height: "303px" }}
+          sx={{ Height: "303px", width: "220px" }}
           onFocus={(e) => e.target.select()}
           onChange={(e) => setInputState(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && renameStatus()}
