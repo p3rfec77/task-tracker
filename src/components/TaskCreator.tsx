@@ -9,6 +9,7 @@ import {
   Button,
   TextField,
   IconButton,
+  Zoom,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 
@@ -40,39 +41,41 @@ const TaskCreator: FC<TaskCreatorProps> = ({ id, inputHandler }) => {
   useClickAway(taskCreatorRef, inputHandler);
 
   return (
-    <Card ref={taskCreatorRef} className="card" sx={{ width: "100%" }}>
-      <CardContent data-taskcreator={true}>
-        <TextField
-          multiline
-          autoFocus
-          required
-          variant="standard"
-          placeholder="write task..."
-          value={input}
-          onKeyDown={(e) => createTaskByEnter(e)}
-          onChange={(e) => setInput(e.target.value)}
-        />
-      </CardContent>
-      <CardContent sx={{ display: "flex", justifyContent: "space-between" }}>
-        <CardActions data-taskcreator={true}>
-          <Button
-            disabled={input.trim().length <= 0}
-            type="submit"
-            color="secondary"
-            variant="contained"
-            size="small"
-            onClick={createTask}
-          >
-            Save
-          </Button>
-        </CardActions>
-        <CardActions>
-          <IconButton color="error" onClick={inputHandler}>
-            <CloseIcon />
-          </IconButton>
-        </CardActions>
-      </CardContent>
-    </Card>
+    <Zoom in>
+      <Card ref={taskCreatorRef} className="card" sx={{ width: "100%" }}>
+        <CardContent data-taskcreator={true}>
+          <TextField
+            multiline
+            autoFocus
+            required
+            variant="standard"
+            placeholder="write task..."
+            value={input}
+            onKeyDown={(e) => createTaskByEnter(e)}
+            onChange={(e) => setInput(e.target.value)}
+          />
+        </CardContent>
+        <CardContent sx={{ display: "flex", justifyContent: "space-between" }}>
+          <CardActions data-taskcreator={true}>
+            <Button
+              disabled={input.trim().length <= 0}
+              type="submit"
+              color="secondary"
+              variant="contained"
+              size="small"
+              onClick={createTask}
+            >
+              Save
+            </Button>
+          </CardActions>
+          <CardActions>
+            <IconButton color="error" onClick={inputHandler}>
+              <CloseIcon />
+            </IconButton>
+          </CardActions>
+        </CardContent>
+      </Card>
+    </Zoom>
   );
 };
 
