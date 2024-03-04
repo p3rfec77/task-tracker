@@ -136,8 +136,17 @@ export const useListItems = create<ListItemsState>()(
           }),
         addStatus: (status) =>
           set((state) => {
+            if (!state.columns[state.columns.length - 1]) {
+              return {
+                columns: [
+                  ...state.columns,
+                  { id: "column-1", title: status, listItems: [] },
+                ],
+              };
+            }
             const [body, id] =
               state.columns[state.columns.length - 1].id.split("-");
+
             const newId = `${body}-${+id + 1}`;
             const newColumns = [
               ...state.columns,
