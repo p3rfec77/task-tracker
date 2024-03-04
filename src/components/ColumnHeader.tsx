@@ -39,7 +39,7 @@ const ColumnHeader: FC<ColumnHeaderProps> = ({
         width: "100%",
         marginBottom: "20px",
         backgroundColor: "white",
-        boxShadow: "rgba(0, 0, 0, 0.35) 0px 2px 5px",
+        boxShadow: "rgba(0, 0, 0, 0.25) 0px 2px 5px",
         padding: "10px 10px",
         borderRadius: "7px",
         display: "flex",

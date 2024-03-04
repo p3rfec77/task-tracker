@@ -35,7 +35,7 @@ function App() {
     <DragDropContext onDragEnd={onDragEnd}>
       <Box
         sx={{
-          backgroundColor: "rgba(255, 172, 215, 0.5)",
+          backgroundColor: "secondary.main",
           height: "100vh",
           padding: {
             xs: "50px 0px 50px 30px",

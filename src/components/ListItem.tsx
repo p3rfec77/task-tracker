@@ -46,7 +46,7 @@ const ListItemComponent: FC<LsitItemProps> = ({
               width: "303px",
               background: snapshot.isDragging ? "rgba(0, 0, 0, 0.2)" : "white",
               marginBottom: "15px",
-              boxShadow: "rgba(0, 0, 0, 0.35) 0px 2px 5px",
+              boxShadow: "rgba(0, 0, 0, 0.15) 0px 0px 5px",
             }}
             {...provided.dragHandleProps}
             {...provided.draggableProps}
@@ -54,7 +54,10 @@ const ListItemComponent: FC<LsitItemProps> = ({
           >
             <Card
               onClick={() => setIsModalOpen(true)}
-              sx={{ width: "100%", cursor: "pointer" }}
+              sx={{
+                width: "100%",
+                cursor: "pointer",
+              }}
             >
               <CardContent sx={{ wordWrap: "break-word" }}>
                 <Typography>{title}</Typography>
