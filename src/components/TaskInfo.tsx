@@ -39,6 +39,7 @@ const TaskInfo: FC<TaskInfoProps> = ({ id, title, description }) => {
           background: "white",
           padding: "25px",
           width: "50vw",
+          minWidth: "350px",
           borderRadius: "20px",
         }}
       >
