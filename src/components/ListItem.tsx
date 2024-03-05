@@ -13,6 +13,7 @@ import {
   IconButton,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
+import DescriptionOutlinedIcon from "@mui/icons-material/DescriptionOutlined";
 
 import PopupModal from "./PopupModal";
 import TaskInfo from "./TaskInfo";
@@ -62,7 +63,10 @@ const ListItemComponent: FC<LsitItemProps> = ({
               <CardContent sx={{ wordWrap: "break-word" }}>
                 <Typography>{title}</Typography>
               </CardContent>
-              <CardActions sx={{ display: "flex", justifyContent: "end" }}>
+              <CardActions
+                sx={{ display: "flex", justifyContent: "end", gap: "218px" }}
+              >
+                {description.length > 0 && <DescriptionOutlinedIcon />}
                 <IconButton
                   color="error"
                   onClick={() => deleteTask(columnId, TaskId)}

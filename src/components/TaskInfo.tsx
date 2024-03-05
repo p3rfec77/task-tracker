@@ -17,10 +17,8 @@ const TaskInfo: FC<TaskInfoProps> = ({ id, title, description }) => {
   const [descriptionInput, setDescriptionInput] = useState<string>("");
   const [isDescriptionOpen, setIsDescriptionOpen] = useState<boolean>(false);
   const saveDescription = () => {
-    if (descriptionInput.trim().length > 0) {
-      changeDescription(id, descriptionInput);
-      setIsDescriptionOpen(false);
-    }
+    changeDescription(id, descriptionInput);
+    setIsDescriptionOpen(false);
   };
 
   const [isTitleOpen, setIsTitleOpen] = useState<boolean>(false);
